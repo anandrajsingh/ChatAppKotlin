@@ -46,17 +46,17 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginBottom="5dp"
-                        android:text="Mobile no."
+                        android:text="Email"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/mobilenumber"
+                        android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:background="@drawable/edittext_background"
-                        android:hint="Enter Mobile Number"
+                        android:hint="Enter Email"
                         android:inputType="number"
                         android:padding="5dp" />
                 </LinearLayout>
@@ -140,17 +140,18 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/i_ll_signup_letter"
+        android:id="@+id/sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/logindetails"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="25dp"
         android:padding="10dp"
-        android:text="Powered By Triosoft Technologies"
+        android:text="Don't have account"
         android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:textColor="@color/purple_700"
         android:textSize="16sp"
         android:textStyle="bold"
         tools:ignore="TextContrastCheck" />
+
 </RelativeLayout>
