@@ -9,6 +9,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -18,6 +20,7 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var btnSignUp : CardView
 
     private lateinit var mAuth : FirebaseAuth
+    private lateinit var mDbReference: DatabaseReference
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,16 +39,18 @@ class SignUpActivity : AppCompatActivity() {
             val password = edtPassword.text.toString()
             val name = edtName.text.toString()
 
-            signUp(email, password)
+            signUp(name, email, password)
         }
 
     }
 
-    private fun signUp(email: String, password: String) {
+    private fun signUp(name:String, email: String, password: String) {
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this){task ->
                 if(task.isSuccessful){
+                    addUserToDatabase(name, email, mAuth.currentUser?.uid!!)
                     val intent = Intent(this, MainActivity::class.java)
+                    finish()
                     startActivity(intent)
 
                 }else{
@@ -53,5 +58,10 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
 
+    }
+
+    private fun addUserToDatabase(name: String, email: String, uid: String) {
+        mDbReference = FirebaseDatabase.getInstance().getReference()
+        mDbReference.child("User").child(uid).setValue(User(name, email, uid))
     }
 }
